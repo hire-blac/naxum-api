@@ -1,0 +1,48 @@
+name: Contacts
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/contacts
+    metadata:
+      groupName: Contacts
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: "Get all the authenticated user's contacts."
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          [
+           {
+             "id": 1,
+             "name": "John Doe",
+             "email": "john@example.com",
+             "phone": "123456789",
+             "user_id": 1
+           }
+          ]
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

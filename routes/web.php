@@ -15,9 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -29,11 +33,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Route::middleware(['auth', 'role:admin'])->group(function () {
-Route::middleware(['auth'])->group(function () {
-  Route::get('/admin', [AdminControllers::class, 'index'])->name('admin.dashboard');
-  Route::get('/admin/users', [AdminControllers::class, 'users'])->name('admin.users');
-  Route::post('/admin/users', [AdminControllers::class, 'createUser'])->name('admin.users.create');
+// Route::prefix('admin')->middleware(['auth', 'can:is-admin'])->group(function () {
+Route::prefix('admin')->middleware(['auth'])->group(function () {
+  Route::get('/users', [AdminControllers::class, 'users'])->name('admin.users');
+  Route::get('/users/create', [AdminControllers::class, 'createUserForm'])->name('admin.users.create');
+  Route::post('/users', [AdminControllers::class, 'storeUser'])->name('admin.users.store');
+  Route::get('/users/{user}/edit', [AdminControllers::class, 'editUserForm'])->name('admin.users.edit');
+  Route::put('/users/{user}', [AdminControllers::class, 'updateUser'])->name('admin.users.update');
+  Route::delete('/users/{user}', [AdminControllers::class, 'deleteUser'])->name('admin.users.delete');
 });
 
 require __DIR__.'/auth.php';
