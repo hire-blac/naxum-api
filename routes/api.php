@@ -24,6 +24,7 @@ use App\Http\Controllers\ContactController;
 Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/profile', [UserController::class, 'profile']);
+    Route::put('/profile', [UserController::class, 'updateProfile']);
 });
 
 Route::middleware('auth:sanctum')->group(function () {
